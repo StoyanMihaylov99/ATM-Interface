@@ -32,16 +32,27 @@ public class Transaction {
 
     }
 
+    public Transaction(Account outAccount, Account inAccount, BigDecimal amount) {
+        if(isApproved(outAccount,inAccount,amount)) {
+            setOutAccount(outAccount);
+            setInAccount(inAccount);
+            setAmount(amount);
+            setTimestamp();
+        }
+    }
+
     public void setTimestamp() {
         this.created = LocalDate.now();
     }
 
-    public void setOutAccount(ArrayList<Account> outAccount) {
-        this.outAccount = outAccount;
+    public void setOutAccount(Account outAccount) {
+        this.outAccount = new ArrayList<>();
+        this.outAccount.add(outAccount);
     }
 
-    public void setInAccount(ArrayList<Account> inAccount) {
-        this.inAccount = inAccount;
+    public void setInAccount(Account inAccount) {
+        this.inAccount = new ArrayList<>();
+        this.inAccount.add(inAccount);
     }
 
     public void setAmount(BigDecimal amount) {
@@ -52,7 +63,7 @@ public class Transaction {
         this.id = id;
     }
 
-    public boolean isApproved(Account inAccount, Account outAccount, BigDecimal amount){
+    public boolean isApproved(Account outAccount, Account inAccount, BigDecimal amount){
         if(!inAccount.isBlocked() && !outAccount.isBlocked()){
             if(outAccount.getBalance().doubleValue() < amount.doubleValue()){
                 //TODO: Display there is not enough money in outAccount;

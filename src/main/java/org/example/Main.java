@@ -1,17 +1,28 @@
 package org.example;
-import org.example.config.Connector;
-import org.example.services.AccountService;
-import org.example.services.UserService;
+import javafx.application.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 
-import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
+import javafx.stage.*;
+import javafx.scene.*;
 
-public class Main {
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        Connector.creating();
-        User user = UserService.findUserByEmail("test");
-        Connector.commitTransaction();
-        AccountService.withdrawByIban(BigDecimal.valueOf(301),user.getBankAccounts().get(0).getIban());
+public class Main extends Application {
+    public static void main(String[] args) {
+        launch(args);
 
     }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/welcome.fxml"));
+        Parent content = loader.load();
+        stage.setTitle("ATM Interface");
+        stage.setScene(new Scene(content,807,483));
+        stage.show();
+
+
+    }
+
 }
