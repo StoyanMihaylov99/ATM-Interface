@@ -1,11 +1,9 @@
 package org.example;
-
 import org.example.config.Connector;
-import org.example.config.PinValidator;
 import org.example.services.UserService;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
-import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import static org.example.config.EmailValidator.validateEmail;
 import static org.example.config.PasswordHashing.hashPassword;
@@ -23,8 +21,8 @@ public class User {
     private String firstName;
     @Column(name = "last_name",nullable = false)
     private String lastName;
-    @Column(name = "pin",nullable = false)
-    private String pin;
+    @Column(name = "password",nullable = false)
+    private String password;
     @OneToMany(mappedBy = "holder",cascade = CascadeType.ALL)
     private List<Account> bankAccounts;
     @Column(name = "email",nullable = false)
@@ -35,10 +33,10 @@ public class User {
 
     }
 
-    public User(String firstName, String lastName, String pin, String email) throws NoSuchAlgorithmException {
+    public User(String firstName, String lastName, String password, String email) {
         setFirstName(firstName);
         setLastName(lastName);
-        setPin(pin);
+        setPassword(password);
         setEmail(email);
         setBankAccounts();
         //print log message
@@ -47,38 +45,20 @@ public class User {
 
     }
 
-    public void setPin(String pin) throws NoSuchAlgorithmException {
-        if(PinValidator.validatePin(pin)) {
-            this.pin = hashPassword(pin);
-        } else {
-            //TODO: display that the pin is wrong;
-            throw new IllegalStateException("pin shoud be 4 digit only.");
-        }
+    public void setPassword(String password) {
+            this.password = hashPassword(password);
     }
 
 
     public void setEmail(String email) {
 
-        if(validateEmail(email) && !verifyDuplicateEmail(email)) {
+        if(validateEmail(email)) {
             this.email = email;
         } else {
             throw new IllegalStateException("email isn't correct or is already in use. Please try with another.");
             //TODO: display that the email isn't correct.
         }
-    }
 
-    private boolean verifyDuplicateEmail(String email) {
-        Connector.commitTransaction();
-        Connector.creating();
-        User user;
-
-        try{
-            user = UserService.findUserByEmail(email);
-            return true;
-        } catch (EntityNotFoundException e){
-            System.out.println("not found email;");
-            return false;
-        }
     }
 
     public String getId() {
@@ -93,8 +73,8 @@ public class User {
         return lastName;
     }
 
-    public String getPin() {
-        return pin;
+    public String getPassword() {
+        return password;
     }
 
     public String getEmail() {
@@ -111,7 +91,7 @@ public class User {
     }
 
     public void setBankAccounts() {
-        this.bankAccounts = bankAccounts;
+        this.bankAccounts = new ArrayList<>();
     }
 
     public List<Account> getBankAccounts() {

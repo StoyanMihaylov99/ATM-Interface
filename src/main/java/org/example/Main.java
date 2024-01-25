@@ -1,14 +1,14 @@
 package org.example;
 import javafx.application.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 
 import javafx.stage.*;
 import javafx.scene.*;
+import org.example.config.Connector;
 
 public class Main extends Application {
     public static void main(String[] args) {
+        Connector.creating();
         launch(args);
 
     }
@@ -21,8 +21,6 @@ public class Main extends Application {
         stage.setTitle("ATM Interface");
         stage.setScene(new Scene(content,807,483));
         stage.show();
-
-
     }
 
 }

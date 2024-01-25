@@ -11,9 +11,9 @@ public class UserService {
 
 
     // Makes a new record of type "User" to the db
-    public static User makeNewUser(String firstName, String lastName, String pin, String email) throws NoSuchAlgorithmException {
+    public static User makeNewUser(String firstName, String lastName, String password, String email) throws NoSuchAlgorithmException {
         Connector.transactionBegin();
-        User user = new User(firstName, lastName, pin, email);
+        User user = new User(firstName, lastName, password, email);
         Connector.getEntityManager().persist(user);
         Connector.commitTransaction();
         return user;
@@ -21,18 +21,17 @@ public class UserService {
     // find a record with this email, if noting found, return EntityNotFoundException with message;
     //this method doesn't commit any transaction, because it's used in other method for modifying records;
     public static User findUserByEmail(String email) {
-        Connector.transactionBegin();
         Query query = Connector.getEntityManager().createQuery("FROM User WHERE email=: email");
         query.setParameter("email", email);
         List<User> list = query.getResultList();
         if(!list.isEmpty()) return list.get(0);
-        throw new EntityNotFoundException("Entity with email: " + email + "not found.");
+        return null;
     }
     // delete the record with this email;
     public static boolean deleteUserByEmail(String email, String pin) {
         User user = findUserByEmail(email);
         if (user != null) {
-            if (PasswordHashing.verifyPassword(pin, user.getPin())) {
+            if (PasswordHashing.verifyPassword(pin, user.getPassword())) {
                 Connector.getEntityManager().remove(user);
                 Connector.commitTransaction();
                 return true;
