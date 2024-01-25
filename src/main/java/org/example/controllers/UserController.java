@@ -10,7 +10,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import org.example.config.EmailValidator;
 import org.example.services.UserService;
-
 import java.io.IOException;
 import java.lang.String;
 import java.net.URL;
@@ -42,8 +41,12 @@ public class UserController implements Initializable {
             if(EmailValidator.verifyDuplicateEmail(email)){
                showAlreadyTakenEmailAlert();
             } else {
+                if(password.length() < 3){
+                    showInvalidPassword();
+                } else {
+
                 UserService.makeNewUser(firstName,lastName,password,email);
-                succeedRegistration(event);
+                succeedRegistration(event);}
             }
         } else {
             showInvalidEmailAlert();
@@ -94,8 +97,16 @@ public class UserController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Invalid Email");
         alert.setHeaderText(null);
-        alert.setContentText("Please enter a valid email address.");
+        alert.setContentText("Please, enter a valid email address.");
 
+        alert.showAndWait();
+    }
+
+    private void showInvalidPassword(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Password");
+        alert.setHeaderText(null);
+        alert.setContentText("Please, enter a valid password between 3 and 20 characters.");
         alert.showAndWait();
     }
 
