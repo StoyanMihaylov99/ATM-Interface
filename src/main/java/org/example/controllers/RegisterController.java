@@ -1,4 +1,5 @@
 package org.example.controllers;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
-public class UserController implements Initializable {
+public class RegisterController implements Initializable {
     @FXML
     private TextField firstNameField;
     @FXML
@@ -27,7 +28,10 @@ public class UserController implements Initializable {
     @FXML
     private TextField emailField;
     @FXML
-    private AnchorPane container;
+    private AnchorPane registerContainer;
+    @FXML
+    private TextField confirmPassword;
+
 
 
     public void handleRegisterButton(javafx.event.ActionEvent event) throws NoSuchAlgorithmException, IOException {
@@ -35,22 +39,36 @@ public class UserController implements Initializable {
         String lastName = lastNameField.getText();
         String password = passwordField.getText();
         String email = emailField.getText();
+        String secondPassword = confirmPassword.getText();
 
 
-        if(EmailValidator.validateEmail(email)){
-            if(EmailValidator.verifyDuplicateEmail(email)){
-               showAlreadyTakenEmailAlert();
+        if (EmailValidator.validateEmail(email)) {
+            if (EmailValidator.verifyDuplicateEmail(email)) {
+                showAlreadyTakenEmailAlert();
             } else {
-                if(password.length() < 3){
+                if (password.length() < 3) {
                     showInvalidPassword();
                 } else {
-
-                UserService.makeNewUser(firstName,lastName,password,email);
-                succeedRegistration(event);}
+                    if(secondPassword.equals(password)){
+                    UserService.makeNewUser(firstName, lastName, password, email);
+                    succeedRegistration(event);}
+                    else {
+                        showPasswordMissmatch();
+                    }
+                }
             }
         } else {
             showInvalidEmailAlert();
         }
+    }
+
+    private void showPasswordMissmatch() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Password");
+        alert.setHeaderText(null);
+        alert.setContentText("Your password miss match, please try again.");
+
+        alert.showAndWait();
     }
 
     @Override
@@ -60,7 +78,7 @@ public class UserController implements Initializable {
         setPasswordTextFieldFormatter(passwordField);
     }
 
-   private void setAlphabeticTextFieldFormatter(TextField textField) {
+    private void setAlphabeticTextFieldFormatter(TextField textField) {
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
             if (newText.length() > 15) {
@@ -102,7 +120,7 @@ public class UserController implements Initializable {
         alert.showAndWait();
     }
 
-    private void showInvalidPassword(){
+    private void showInvalidPassword() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Invalid Password");
         alert.setHeaderText(null);
@@ -115,7 +133,6 @@ public class UserController implements Initializable {
         alert.setTitle("Invalid Email");
         alert.setHeaderText(null);
         alert.setContentText("This email is already in use.");
-
         alert.showAndWait();
     }
 
@@ -123,7 +140,7 @@ public class UserController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/home-view.fxml"));
         Parent root = loader.load();
-        this.container.getScene().setRoot(root);
+        this.registerContainer.getScene().setRoot(root);
     }
 
 
