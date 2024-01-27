@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.example.User;
+import org.example.config.LoggedUser;
 import org.example.config.PasswordHashing;
 import org.example.services.UserService;
 
@@ -31,6 +32,7 @@ public class LoginController {
             alert.setContentText("This email doesn't exist.");
             alert.showAndWait();
         } else if (PasswordHashing.verifyPassword(logInPassword.getText(), user.getPassword())) {
+            LoggedUser loggedUser = LoggedUser.getInstance(user.getEmail());
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/home-view.fxml"));
             Parent root = loader.load();
@@ -44,5 +46,6 @@ public class LoginController {
             alert.showAndWait();
         }
     }
+
 
 }

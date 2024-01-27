@@ -1,9 +1,11 @@
 package org.example.services;
+import org.example.Account;
 import org.example.User;
 import org.example.config.Connector;
 import org.example.config.PasswordHashing;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class UserService {
         User user = new User(firstName, lastName, password, email);
         Connector.getEntityManager().persist(user);
         Connector.commitTransaction();
+        Account firstAccount = AccountService.makeNewAccount(BigDecimal.valueOf(0),user);
         return user;
     }
     // find a record with this email, if noting found, return EntityNotFoundException with message;

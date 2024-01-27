@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
+import org.example.User;
 import org.example.config.EmailValidator;
 import org.example.services.UserService;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class RegisterController implements Initializable {
                     showInvalidPassword();
                 } else {
                     if(secondPassword.equals(password)){
-                    UserService.makeNewUser(firstName, lastName, password, email);
+                   UserService.makeNewUser(firstName, lastName, password, email);
                     succeedRegistration(event);}
                     else {
                         showPasswordMissmatch();
@@ -138,7 +139,7 @@ public class RegisterController implements Initializable {
 
     private void succeedRegistration(javafx.event.ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/home-view.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/log-in.fxml"));
         Parent root = loader.load();
         this.registerContainer.getScene().setRoot(root);
     }

@@ -24,7 +24,6 @@ public class AccountService {
     // find a record with this iban, if noting found, return EntityNotFoundException with message;
     //this method doesn't commit any transaction, because it's used in other method for modifying records;
     public static Account findByIban(String iban) {
-        Connector.transactionBegin();
         Query query = Connector.getEntityManager().createQuery("FROM Account WHERE iban=: iban");
         query.setParameter("iban", iban);
         List<Account> accounts = query.getResultList();

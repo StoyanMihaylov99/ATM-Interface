@@ -37,7 +37,7 @@ public class Account {
     }
 
     public void setBalance(BigDecimal balance) {
-        if (balance.doubleValue() <= 0) {
+        if (balance.doubleValue() < 0) {
             //TODO: error display
         } else {
             this.balance = balance;

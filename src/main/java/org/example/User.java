@@ -1,8 +1,10 @@
 package org.example;
 import org.example.config.Connector;
+import org.example.services.AccountService;
 import org.example.services.UserService;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import static org.example.config.EmailValidator.validateEmail;
