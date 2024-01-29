@@ -2,11 +2,13 @@ package org.example.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.example.Account;
 import javafx.scene.control.TableColumn;
@@ -15,7 +17,6 @@ import org.example.User;
 import org.example.config.LoggedUser;
 import org.example.services.AccountService;
 import org.example.services.UserService;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -28,55 +29,73 @@ public class HomeController implements Initializable {
     @FXML
     private TableView<Account> accountsTableView;
     @FXML
-    private TableColumn<Account,String> ibanColumn;
+    private TableColumn<Account, String> ibanColumn;
     @FXML
-    private TableColumn<Account,String> balanceColumn;
+    private TableColumn<Account, String> balanceColumn;
 
 
     private User currentUser;
+    private List<Account> userBankAccounts;
+    @FXML
+    private ObservableList<Account> observableAccounts;
 
-    private void setUser(){
-        currentUser = new User();
-        currentUser  = UserService.findUserByEmail(LoggedUser.getEmail());
+    private List<Account> setUserInfo() {
+        currentUser = UserService.findUserByEmail(LoggedUser.getEmail());
+        userBankAccounts = currentUser.getBankAccounts();
+        return userBankAccounts;
     }
 
-    private User getUser(){
+    private User getUser() {
         return currentUser;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Get the list of BankAccounts from the User
-        setUser();
-        List<Account> userBankAccounts = currentUser.getBankAccounts();
-        // Convert the List to an ObservableList for the TableView
-        ObservableList<Account> observableAccounts = FXCollections.observableArrayList(userBankAccounts);
 
-        // Set the items in the TableView
+        List<Account> currentBankAccounts = setUserInfo();
+        observableAccounts = FXCollections.observableArrayList(currentBankAccounts);
         accountsTableView.setItems(observableAccounts);
 
         // Set up the cell value factories for each column
         ibanColumn.setCellValueFactory(new PropertyValueFactory<>("Iban"));
         balanceColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
 
+        accountsTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getClickCount() == 2){
+                    Account selectedRecord = accountsTableView.getSelectionModel().getSelectedItem();
+                    if(selectedRecord != null){
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/fxml/welcome.fxml"));
+                        Parent root = null;
+                        try {
+                            root = loader.load();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        homeContainer.getScene().setRoot(root);
+
+                    }
+                }
+            }
+        });
+
     }
+
 
     public void addNewAccount(ActionEvent actionEvent) throws IOException {
-        AccountService.makeNewAccount(BigDecimal.valueOf(0),getUser());
+        Account newAccount = AccountService.makeNewAccount(BigDecimal.valueOf(0.00), getUser());
+        observableAccounts.add(newAccount);
         accountsTableView.refresh();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/newBankAccountAnnouncement.fxml"));
-        Parent root = loader.load();
-        this.homeContainer.getScene().setRoot(root);
     }
 
-    public void goBackButton(ActionEvent actionEvent) throws IOException {
+
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        currentUser = null;
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/home-view.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/welcome.fxml"));
         Parent root = loader.load();
         this.homeContainer.getScene().setRoot(root);
-    }
-
-    public void moreInfoButton(ActionEvent actionEvent) {
     }
 }

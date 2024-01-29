@@ -22,5 +22,6 @@
          </columns>
       </TableView>
       <Button layoutX="107.0" layoutY="417.0" mnemonicParsing="false" onAction="#addNewAccount" prefHeight="31.0" prefWidth="137.0" text="Add New Account" />
+      <Button layoutX="653.0" layoutY="414.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" prefWidth="128.0" text="Log out" />
    </children>
 </AnchorPane>
