@@ -36,15 +36,11 @@ public class AccountService {
         Account account = findByIban(iban);
         if (account != null) {
             if (account.getIban().equals(iban)) {
+                Connector.transactionBegin();
                 Connector.getEntityManager().remove(account);
                 Connector.commitTransaction();
                 return true;
-            } else {
-                //TODO: display that the iban is wrong;
             }
-        } else {
-            //TODO: display that there is no records with this Id or iban;
-            return false;
         }
         return false;
     }

@@ -25,7 +25,7 @@ public class User {
     private String lastName;
     @Column(name = "password",nullable = false)
     private String password;
-    @OneToMany(mappedBy = "holder",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "holder")
     private List<Account> bankAccounts;
     @Column(name = "email",nullable = false)
     private String email;
