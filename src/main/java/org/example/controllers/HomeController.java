@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -67,7 +66,7 @@ public class HomeController implements Initializable {
                     if(selectedRecord != null){
                         SelectedAccount selectedAccount = new SelectedAccount(selectedRecord.getIban());
                         FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("/fxml/BankAccount.fxml"));
+                        loader.setLocation(getClass().getResource("/fxml/bank-account.fxml"));
                         Parent root = null;
                         try {
                             root = loader.load();

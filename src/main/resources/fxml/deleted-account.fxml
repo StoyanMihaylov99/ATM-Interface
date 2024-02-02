@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.WelcomeController">
+    <children>
+        <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="121.0" layoutY="110.0" text="Congrats! You successfully delete bank account!" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="110.0">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Label>
+      <Label layoutX="248.0" layoutY="187.0" opacity="0.65" prefHeight="28.0" prefWidth="312.0" text="Please, restart the program, the operation is complete." />
+    </children>
+</AnchorPane>

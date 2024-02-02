@@ -41,7 +41,7 @@ public class AccountController implements Initializable {
         if(SelectedAccount.getBalance().compareTo(BigDecimal.ZERO) == 0){
             if(AccountService.deleteAccountById(SelectedAccount.getId(),SelectedAccount.getIban())){
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/fxml/welcome.fxml"));
+                loader.setLocation(getClass().getResource("/fxml/deleted-account.fxml"));
                 Parent root = loader.load();
                 this.accountContainer.getScene().setRoot(root);
             }
