@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Entity
-@Table(name = "transactons")
+@Table(name = "transactions")
 public class Transaction {
     @Id
     @GeneratedValue(generator = "uuid-string")
@@ -20,11 +20,11 @@ public class Transaction {
     @Column(name = "created",nullable = false)
     private LocalDate created;
     @Column(name = "out_account",nullable = false)
-    @OneToMany
-    private List<Account> outAccount;
-    @OneToMany
+    @OneToOne
+    private Account outAccount;
+    @OneToOne
     @Column(name = "in_account",nullable = false)
-    private List<Account> inAccount;
+    private Account inAccount;
     @Column(name = "amount",nullable = false)
     private BigDecimal amount;
 
@@ -33,12 +33,10 @@ public class Transaction {
     }
 
     public Transaction(Account outAccount, Account inAccount, BigDecimal amount) {
-        if(isApproved(outAccount,inAccount,amount)) {
             setOutAccount(outAccount);
             setInAccount(inAccount);
             setAmount(amount);
             setTimestamp();
-        }
     }
 
     public void setTimestamp() {
@@ -46,13 +44,12 @@ public class Transaction {
     }
 
     public void setOutAccount(Account outAccount) {
-        this.outAccount = new ArrayList<>();
-        this.outAccount.add(outAccount);
+        this.outAccount = outAccount;
     }
 
     public void setInAccount(Account inAccount) {
-        this.inAccount = new ArrayList<>();
-        this.inAccount.add(inAccount);
+        this.inAccount = inAccount;
+
     }
 
     public void setAmount(BigDecimal amount) {
@@ -63,17 +60,31 @@ public class Transaction {
         this.id = id;
     }
 
-    public boolean isApproved(Account outAccount, Account inAccount, BigDecimal amount){
-        if(!inAccount.isBlocked() && !outAccount.isBlocked()){
-            if(outAccount.getBalance().doubleValue() < amount.doubleValue()){
-                //TODO: Display there is not enough money in outAccount;
+    public boolean isApproved(){
+            if(this.outAccount.getBalance().doubleValue() < amount.doubleValue()){
                 return false;
-            } else {
-                return true;
             }
-        } else {
-            //TODO: Display there is a blocked account;
-            return false;
-        }
+                return true;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public Account getOutAccount() {
+        return outAccount;
+    }
+
+    public Account getInAccount() {
+        return inAccount;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
     }
 }
