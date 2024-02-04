@@ -24,13 +24,6 @@ public class AccountController implements Initializable {
     @FXML
     public AnchorPane accountContainer;
     @FXML
-    public TextField ibanInput;
-    @FXML
-    public TextField amountInput;
-    @FXML
-    public TextField messageInput;
-
-    @FXML
     private Label ibanInfo;
     @FXML
     private Label balanceInfo;
@@ -60,28 +53,26 @@ public class AccountController implements Initializable {
         }
     }
 
-
-    public void handleSubmissionTransaction(ActionEvent actionEvent) {
-        Account outAccount = AccountService.findByIban(SelectedAccount.getIban());
-        Account inAccount = AccountService.findByIban(ibanInput.getText());
-        if(inAccount.isBlocked()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Blocked Account");
-            alert.setHeaderText(null);
-            alert.setContentText("The account you are trying to send funds has been blocked.");
-            alert.showAndWait();
-        }
-        double amount = Double.parseDouble(amountInput.getText());
-        Transaction transaction = TransactionService.MakeATransaction(outAccount,inAccount,BigDecimal.valueOf(amount));
-        if(transaction.isApproved()){
-            //TODO: successfully submition;
-
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Money error");
-            alert.setHeaderText(null);
-            alert.setContentText("You don't have enough funds.");
-            alert.showAndWait();
-        }
+    public void openTransferView(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/transaction-view.fxml"));
+        Parent root = loader.load();
+        this.accountContainer.getScene().setRoot(root);
     }
+
+    public void openWithdrawView(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/withdraw-view.fxml"));
+        Parent root = loader.load();
+        this.accountContainer.getScene().setRoot(root);
+    }
+
+    public void openDepositView(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/deposit-view.fxml"));
+        Parent root = loader.load();
+        this.accountContainer.getScene().setRoot(root);
+
+    }
+
 }

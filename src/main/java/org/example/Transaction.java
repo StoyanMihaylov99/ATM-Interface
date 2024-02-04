@@ -19,24 +19,25 @@ public class Transaction {
     private String id;
     @Column(name = "created",nullable = false)
     private LocalDate created;
-    @Column(name = "out_account",nullable = false)
     @OneToOne
     private Account outAccount;
     @OneToOne
-    @Column(name = "in_account",nullable = false)
     private Account inAccount;
     @Column(name = "amount",nullable = false)
     private BigDecimal amount;
+    @Column(name = "message",columnDefinition = "TEXT")
+    private String message;
 
     public Transaction() {
 
     }
 
-    public Transaction(Account outAccount, Account inAccount, BigDecimal amount) {
+    public Transaction(Account outAccount, Account inAccount, BigDecimal amount, String  message) {
             setOutAccount(outAccount);
             setInAccount(inAccount);
             setAmount(amount);
             setTimestamp();
+            setMessage(message);
     }
 
     public void setTimestamp() {
@@ -60,14 +61,6 @@ public class Transaction {
         this.id = id;
     }
 
-    public boolean isApproved(){
-            if(this.outAccount.getBalance().doubleValue() < amount.doubleValue()){
-                return false;
-            }
-                return true;
-    }
-
-
     public String getId() {
         return id;
     }
@@ -86,5 +79,13 @@ public class Transaction {
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

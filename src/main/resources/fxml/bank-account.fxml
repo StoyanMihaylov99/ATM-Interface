@@ -27,12 +27,8 @@
          </font></Label>
       <Button layoutX="162.0" layoutY="263.0" mnemonicParsing="false" onAction="#openWithdrawView" text="Withdraw" />
       <Button layoutX="66.0" layoutY="263.0" mnemonicParsing="false" onAction="#openDepositView" text="Deposit" />
-      <Button layoutX="613.0" layoutY="415.0" mnemonicParsing="false" onAction="#deleteAccount" text="Delete  Bank Account" />
+      <Button layoutX="574.0" layoutY="415.0" mnemonicParsing="false" onAction="#deleteAccount" text="Delete  Bank Account" textFill="#d70000" wrapText="true" />
       <Button layoutX="269.0" layoutY="263.0" mnemonicParsing="false" onAction="#openTransferView" text="Transfer" />
-      <Label layoutX="560.0" layoutY="440.0" opacity="0.67" prefHeight="35.0" prefWidth="236.0" text="Your balance have to be 0.00, otherwise it wont be deleted.">
-         <font>
-            <Font size="9.0" />
-         </font>
-      </Label>
+      <Label layoutX="481.0" layoutY="440.0" opacity="0.67" prefHeight="35.0" prefWidth="315.0" text="Your balance have to be 0.00, otherwise it wont be deleted." />
    </children>
 </AnchorPane>

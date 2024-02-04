@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,7 +10,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
-import org.example.User;
 import org.example.config.EmailValidator;
 import org.example.services.UserService;
 import java.io.IOException;
@@ -145,4 +145,10 @@ public class RegisterController implements Initializable {
     }
 
 
+    public void back(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/welcome.fxml"));
+        Parent root = loader.load();
+        this.registerContainer.getScene().setRoot(root);
+    }
 }

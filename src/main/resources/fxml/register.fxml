@@ -52,5 +52,6 @@
                 <Font size="16.0" />
             </font>
         </Button>
+      <Button layoutX="22.0" layoutY="20.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="64.0" text="&lt;-  Back" />
     </children>
 </AnchorPane>

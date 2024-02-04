@@ -28,8 +28,9 @@ public class AccountService {
         query.setParameter("iban", iban);
         List<Account> accounts = query.getResultList();
         if (!accounts.isEmpty()) return accounts.get(0);
-        throw new EntityNotFoundException("Entity with iban: " + iban + "not found.");
+        return null;
     }
+
     // delete the record with this id;
     // The iban is for verifying;
     public static boolean deleteAccountById(String id, String iban) {
@@ -45,10 +46,11 @@ public class AccountService {
         return false;
     }
 
-    public static boolean makeADepositByIban(BigDecimal amount, String iban){
+    public static boolean makeADepositByIban(BigDecimal amount, String iban) {
         Account account = findByIban(iban);
-        if(account != null && !account.isBlocked()){
+        if (account != null && !account.isBlocked()) {
             account.deposit(amount);
+            Connector.transactionBegin();
             Connector.getEntityManager().merge(account);
             Connector.commitTransaction();
             return true;
@@ -58,23 +60,23 @@ public class AccountService {
         }
     }
 
-    public static boolean withdrawByIban(BigDecimal amount,String iban){
+    public static boolean withdrawByIban(BigDecimal amount, String iban) {
         Account account = findByIban(iban);
-        if(account != null && !account.isBlocked()){
-            if(account.withdraw(amount)) {
+        if (account != null && !account.isBlocked()) {
+            if (account.withdraw(amount)) {
+                Connector.transactionBegin();
                 Connector.getEntityManager().merge(account);
                 Connector.commitTransaction();
                 return true;
-            } else {
-                //TODO: Display not enough money
-                return false;
             }
-        } else {
             return false;
-            //TODO: Display wrong iban;
+
+
+        } else {
+            //TODO: Display that the Iban is wrong or blocked
+            return false;
         }
     }
-
-    }
+}
 
 

@@ -45,8 +45,7 @@ public class Account {
     }
 
     public boolean withdraw(BigDecimal amount){
-
-        if(this.balance.subtract(amount).compareTo(BigDecimal.ZERO) > -1 && !isBlocked){
+        if(this.balance.subtract(amount).compareTo(BigDecimal.ZERO) > 0 && !isBlocked){
             this.balance = balance.subtract(amount);
             return true;
         } else {

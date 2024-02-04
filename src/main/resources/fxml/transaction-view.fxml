@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="transactionContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.TransactionController">
+   <children>
+      <Label layoutX="305.0" layoutY="55.0" prefHeight="17.0" prefWidth="197.0" text="Transfer to:">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Label layoutX="92.0" layoutY="176.0" prefHeight="31.0" prefWidth="67.0" text="IBAN:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="233.0" text="Amount:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="287.0" text="Message:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ibanInput" layoutX="171.0" layoutY="179.0" prefHeight="25.0" prefWidth="284.0" />
+      <TextField fx:id="amountInput" layoutX="171.0" layoutY="234.0" prefHeight="25.0" prefWidth="197.0" />
+      <TextField fx:id="messageInput" layoutX="171.0" layoutY="287.0" prefHeight="27.0" prefWidth="284.0" />
+      <Button layoutX="171.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleSubmissionTransaction" prefHeight="25.0" prefWidth="146.0" text="Submit Transaction" />
+      <Label layoutX="171.0" layoutY="207.0" opacity="0.6" prefHeight="17.0" prefWidth="209.0" text="Please enter the recipient's Iban." />
+      <Label layoutX="171.0" layoutY="260.0" opacity="0.6" prefHeight="17.0" prefWidth="181.0" text="Please enter the exact amount." />
+      <Label layoutX="169.0" layoutY="314.0" opacity="0.6" prefHeight="9.0" prefWidth="297.0" text="Please enter the reason for this transaction." />
+      <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="67.0" text="&lt;- Back" />
+   </children>
+</AnchorPane>

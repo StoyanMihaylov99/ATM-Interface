@@ -8,17 +8,17 @@
 
 <AnchorPane fx:id="transactionContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.TransactionController">
     <children>
-        <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="169.0" layoutY="130.0" prefHeight="40.0" prefWidth="470.0" text="Please enter the amount you would like to withdraw:" AnchorPane.leftAnchor="169.0" AnchorPane.topAnchor="130.0">
+        <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="169.0" layoutY="130.0" prefHeight="40.0" prefWidth="470.0" text="Please enter the amount you would like to deposit:" AnchorPane.leftAnchor="169.0" AnchorPane.topAnchor="130.0">
             <font>
                 <Font size="20.0" />
             </font>
         </Label>
-      <TextField fx:id="withdrawAmount" layoutX="280.0" layoutY="217.0" prefHeight="40.0" prefWidth="247.0" />
-      <Button layoutX="348.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleWithdrawButton" prefHeight="40.0" prefWidth="112.0" text="Withdraw">
+      <TextField fx:id="depositAmount" layoutX="280.0" layoutY="217.0" prefHeight="40.0" prefWidth="247.0" />
+      <Button layoutX="348.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleDepositButton" prefHeight="40.0" prefWidth="112.0" text="Deposit">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="31.0" layoutY="30.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="66.0" text="&lt;- Back" />
+      <Button layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="64.0" text="&lt;- Back" />
     </children>
 </AnchorPane>

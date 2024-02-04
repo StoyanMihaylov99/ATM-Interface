@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -48,4 +49,10 @@ public class LoginController {
     }
 
 
+    public void back(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/welcome.fxml"));
+        Parent root = loader.load();
+        this.logInContainer.getScene().setRoot(root);
+    }
 }

@@ -9,17 +9,18 @@
 
 <AnchorPane fx:id="logInContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.LoginController">
     <children>
-        <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="271.0" layoutY="31.0" text="Welcome back! Let's log in!" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="31.0">
+        <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="271.0" layoutY="33.0" text="Welcome back! Let's log in!" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="33.0">
             <font>
                 <Font size="22.0" />
             </font>
         </Label>
-      <TextField layoutX="319.0" layoutY="140.0" prefHeight="39.0" prefWidth="170.0" promptText="Email" fx:id="logInEmail"/>
-      <PasswordField layoutX="319.0" layoutY="203.0" prefHeight="39.0" prefWidth="170.0" promptText="Password" fx:id="logInPassword"/>
-      <Button layoutX="367.0" layoutY="261.0" mnemonicParsing="false" text="Log in" onAction="#handleLogInButton">
+      <TextField fx:id="logInEmail" layoutX="319.0" layoutY="140.0" prefHeight="39.0" prefWidth="170.0" promptText="Email" />
+      <PasswordField fx:id="logInPassword" layoutX="319.0" layoutY="203.0" prefHeight="39.0" prefWidth="170.0" promptText="Password" />
+      <Button layoutX="367.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleLogInButton" text="Log in">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Button layoutX="21.0" layoutY="21.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="74.0" text="&lt;- Back" />
     </children>
 </AnchorPane>

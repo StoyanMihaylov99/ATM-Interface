@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.WelcomeController">
+    <children>
+        <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="82.0" layoutY="53.0" prefHeight="39.0" prefWidth="651.0" text="Congrats! Your deposit transaction has been executed." AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="53.0">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Label>
+      <Label layoutX="191.0" layoutY="105.0" opacity="0.65" prefHeight="28.0" prefWidth="426.0" text="Please restart the program, your session has expired, the operation  is complete." />
+    </children>
+</AnchorPane>
