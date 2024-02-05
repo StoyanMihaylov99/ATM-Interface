@@ -97,4 +97,9 @@ public class Account {
     public User getHolder() {
         return holder;
     }
+
+    @Override
+    public String toString() {
+        return this.iban;
+    }
 }

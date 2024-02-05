@@ -25,10 +25,11 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button layoutX="162.0" layoutY="263.0" mnemonicParsing="false" onAction="#openWithdrawView" text="Withdraw" />
-      <Button layoutX="66.0" layoutY="263.0" mnemonicParsing="false" onAction="#openDepositView" text="Deposit" />
+      <Button layoutX="162.0" layoutY="288.0" mnemonicParsing="false" onAction="#openWithdrawView" text="Withdraw" />
+      <Button layoutX="66.0" layoutY="288.0" mnemonicParsing="false" onAction="#openDepositView" text="Deposit" />
       <Button layoutX="574.0" layoutY="415.0" mnemonicParsing="false" onAction="#deleteAccount" text="Delete  Bank Account" textFill="#d70000" wrapText="true" />
-      <Button layoutX="269.0" layoutY="263.0" mnemonicParsing="false" onAction="#openTransferView" text="Transfer" />
+      <Button layoutX="267.0" layoutY="288.0" mnemonicParsing="false" onAction="#openTransferView" text="Transfer" />
       <Label layoutX="481.0" layoutY="440.0" opacity="0.67" prefHeight="35.0" prefWidth="315.0" text="Your balance have to be 0.00, otherwise it wont be deleted." />
+      <Button layoutX="61.0" layoutY="205.0" mnemonicParsing="false" onAction="#checkHistory" prefHeight="27.0" prefWidth="84.0" text="History" />
    </children>
 </AnchorPane>

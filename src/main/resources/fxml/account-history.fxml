@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="transactionContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.HistoryController">
+<children>
+    <TableView fx:id="transactionTableViewIn" layoutX="54.0" layoutY="119.0" prefHeight="113.0" prefWidth="699.0">
+        <columns>
+            <TableColumn fx:id="createdIn" prefWidth="108.0" text="Created" />
+            <TableColumn fx:id="from" prefWidth="260.0" text="From" />
+            <TableColumn fx:id="amountIn" prefWidth="158.0" text="Amount" />
+            <TableColumn fx:id="messageIn" prefWidth="172.0" text="Message" />
+        </columns>
+    </TableView>
+      <TableView fx:id="transactionTableViewOut" layoutX="54.0" layoutY="298.0" prefHeight="113.0" prefWidth="699.0">
+         <columns>
+            <TableColumn fx:id="createdOut" prefWidth="108.0" text="Created" />
+             <TableColumn fx:id="to" prefWidth="261.0" text="To"/>
+             <TableColumn fx:id="amountOut" prefWidth="183.0" text="Amount" />
+             <TableColumn fx:id="messageOut" prefWidth="146.0" text="Message" />
+         </columns>
+      </TableView>
+      <Label layoutX="327.0" layoutY="78.0" prefHeight="17.0" prefWidth="136.0" text="In this Account:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="312.0" layoutY="261.0" prefHeight="28.0" prefWidth="184.0" text="Out of this Account:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Button layoutX="28.0" layoutY="31.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="82.0" text="&lt;- Back" />
+</children>
+</AnchorPane>
