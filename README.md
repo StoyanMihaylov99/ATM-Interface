@@ -10,7 +10,7 @@ This is the welcome page, after you run the application. You have to choose to m
 ![welcome](https://github.com/StoyanMihaylov99/ATM-Interface/assets/107346999/6e082703-58aa-4c7a-9baa-97ade86bfc8c)
 
 In the register view, we have some validations, such as regular expresion for the field "email" and a custom validator for fields "first name"
-and "last name", to contains only letters.
+and "last name", to contains only letters. If the user, tries to insert other type of characters, the program ignore it, and wait for the next alphabetic character.
 ![register](https://github.com/StoyanMihaylov99/ATM-Interface/assets/107346999/d7774ce1-b247-49fc-959d-16e88476bcbe)
 
 This is the dashboard of the user, it contains tableview of all bank accounts and their balance.
