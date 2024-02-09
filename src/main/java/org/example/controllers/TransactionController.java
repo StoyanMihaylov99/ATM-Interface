@@ -1,19 +1,14 @@
 package org.example.controllers;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import org.example.Account;
 import org.example.config.AmountValidator;
+import org.example.config.Connector;
 import org.example.config.SelectedAccount;
 import org.example.services.AccountService;
 import org.example.services.TransactionService;
@@ -46,6 +41,7 @@ public class TransactionController{
                 loader.setLocation(getClass().getResource("/fxml/successfully-withdraw.fxml"));
                 Parent root = loader.load();
                 this.transactionContainer.getScene().setRoot(root);
+                Connector.closeConnection();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Amount");
@@ -73,6 +69,7 @@ public class TransactionController{
             loader.setLocation(getClass().getResource("/fxml/successfully-deposit.fxml"));
             Parent root = loader.load();
             this.transactionContainer.getScene().setRoot(root);
+            Connector.closeConnection();
 
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -93,11 +90,11 @@ public class TransactionController{
             alert.setHeaderText(null);
             alert.setContentText("There is no bank account with this Iban.");
             alert.showAndWait();
-        } else if (inAccount.isBlocked()) {
+        } else if (inAccount.getHolder().isBlocked()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Blocked Account");
+            alert.setTitle("Blocked User");
             alert.setHeaderText(null);
-            alert.setContentText("The account you are trying to send funds has been blocked.");
+            alert.setContentText("The user you are trying to send funds has been blocked.");
             alert.showAndWait();
         } else if (AmountValidator.validateAmount(amountInput.getText())) {
             double amount = Double.parseDouble(amountInput.getText());
@@ -109,6 +106,7 @@ public class TransactionController{
                 loader.setLocation(getClass().getResource("/fxml/successfully-transaction.fxml"));
                 Parent root = loader.load();
                 this.transactionContainer.getScene().setRoot(root);
+                Connector.closeConnection();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Money error");

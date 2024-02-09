@@ -4,6 +4,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
+    //This class is used to hashing the user password. The application stores only the generated hashcode.
 public class PasswordHashing {
     public static String hashPassword(String password) {
         try {
@@ -25,6 +27,8 @@ public class PasswordHashing {
             return null;
         }
     }
+
+     // This method verify the entered password, and the hashcode of the existing one.
 
     public static boolean verifyPassword(String enteredPassword, String storedHash) {
         String enteredPasswordHash = hashPassword(enteredPassword);

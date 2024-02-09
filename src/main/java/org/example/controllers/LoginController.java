@@ -23,6 +23,8 @@ public class LoginController {
     @FXML
     private PasswordField logInPassword;
 
+    private static final String ADMIN_EMAIL= "admin@atm.com";
+
     @FXML
     private void handleLogInButton(javafx.event.ActionEvent actionEvent) throws IOException {
         User user = UserService.findUserByEmail(logInEmail.getText());
@@ -35,7 +37,18 @@ public class LoginController {
         } else if (PasswordHashing.verifyPassword(logInPassword.getText(), user.getPassword())) {
             LoggedUser loggedUser = LoggedUser.getInstance(user.getEmail());
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/home-view.fxml"));
+            if(loggedUser.getEmail().equals(ADMIN_EMAIL)){
+                loader.setLocation(getClass().getResource("/fxml/admin-dashboard.fxml"));
+            } else {
+                if(user.isBlocked()){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Blocked!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your account is blocked, please contact the Bank!");
+
+                    alert.showAndWait();
+                }
+                loader.setLocation(getClass().getResource("/fxml/home-view.fxml"));}
             Parent root = loader.load();
             this.logInContainer.getScene().setRoot(root);
         } else {

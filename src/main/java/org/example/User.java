@@ -1,10 +1,9 @@
 package org.example;
+import jakarta.persistence.*;
 import org.example.config.Connector;
 import org.example.services.AccountService;
 import org.example.services.UserService;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import static org.example.config.EmailValidator.validateEmail;
@@ -25,10 +24,13 @@ public class User {
     private String lastName;
     @Column(name = "password",nullable = false)
     private String password;
-    @OneToMany(mappedBy = "holder")
+    @OneToMany(mappedBy = "holder", cascade = CascadeType.ALL)
     private List<Account> bankAccounts;
     @Column(name = "email",nullable = false)
     private String email;
+
+    @Column(name = "is_blocked",nullable = false)
+    private boolean isBlocked;
 
 
     public User() {
@@ -41,8 +43,7 @@ public class User {
         setPassword(password);
         setEmail(email);
         setBankAccounts();
-        //print log message
-        System.out.printf("New user %s, %s with ID %s created.\n", firstName, lastName, id);
+        setBlocked(false);
 
 
     }
@@ -53,14 +54,9 @@ public class User {
 
 
     public void setEmail(String email) {
-
         if(validateEmail(email)) {
             this.email = email;
-        } else {
-            throw new IllegalStateException("email isn't correct or is already in use. Please try with another.");
-            //TODO: display that the email isn't correct.
         }
-
     }
 
     public String getId() {
@@ -98,5 +94,17 @@ public class User {
 
     public List<Account> getBankAccounts() {
         return bankAccounts;
+    }
+
+    public void setBankAccounts(List<Account> bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 }

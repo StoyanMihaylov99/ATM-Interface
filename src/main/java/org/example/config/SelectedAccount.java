@@ -1,10 +1,8 @@
 package org.example.config;
-
-import org.example.controllers.AccountController;
 import org.example.services.AccountService;
-
 import java.math.BigDecimal;
 
+    //This is a class to mimic the account session, and pass the information through controllers and views.
 public class SelectedAccount {
     private static String id;
     private static String iban;

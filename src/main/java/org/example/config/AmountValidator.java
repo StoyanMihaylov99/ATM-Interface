@@ -2,6 +2,7 @@ package org.example.config;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+    // This is a decimal number validator (regular expression), it's used on input fields to validate the decimal amount;
 public class AmountValidator {
 
     private static final String DECIMAL_PATTERN =

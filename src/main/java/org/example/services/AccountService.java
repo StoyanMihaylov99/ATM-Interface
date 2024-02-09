@@ -1,12 +1,10 @@
 package org.example.services;
-
+import jakarta.persistence.Query;
 import org.example.Account;
 import org.example.User;
 import org.example.config.Connector;
-
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountService {
@@ -48,21 +46,21 @@ public class AccountService {
 
     public static boolean makeADepositByIban(BigDecimal amount, String iban) {
         Account account = findByIban(iban);
-        if (account != null && !account.isBlocked()) {
+        if (account != null) {
             account.deposit(amount);
             Connector.transactionBegin();
             Connector.getEntityManager().merge(account);
             Connector.commitTransaction();
             return true;
-        } else {
-            //TODO: Display the iban is wrong;
-            return false;
         }
+
+        return false;
+
     }
 
     public static boolean withdrawByIban(BigDecimal amount, String iban) {
         Account account = findByIban(iban);
-        if (account != null && !account.isBlocked()) {
+        if (account != null) {
             if (account.withdraw(amount)) {
                 Connector.transactionBegin();
                 Connector.getEntityManager().merge(account);

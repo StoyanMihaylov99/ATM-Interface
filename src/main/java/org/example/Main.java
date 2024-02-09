@@ -1,7 +1,6 @@
 package org.example;
 import javafx.application.*;
 import javafx.fxml.FXMLLoader;
-
 import javafx.stage.*;
 import javafx.scene.*;
 import org.example.config.Connector;

@@ -1,8 +1,7 @@
 package org.example.config;
-import org.example.Account;
-import org.example.User;
-import java.util.List;
 
+
+    //This class mimic a user session, it's singelton designed to story only one session.
 public class LoggedUser {
     private static String email;
     private static LoggedUser instance;

@@ -1,12 +1,10 @@
 package org.example.config;
-
-import org.example.User;
 import org.example.services.UserService;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+    //This class is for registration method(email field), it's validate the input data.
 public class EmailValidator {
 
     private static final String EMAIL_PATTERN =

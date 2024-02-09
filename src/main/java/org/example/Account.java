@@ -1,6 +1,6 @@
 package org.example;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -15,67 +15,46 @@ public class Account {
     private String id;
     @Column(name = "balance",nullable = false)
     private BigDecimal balance;
-    @Column(name = "is_blocked",nullable = false)
-    private boolean isBlocked;
     @Column(name = "iban",nullable = false)
     private String iban;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User holder;
 
     public Account(BigDecimal startBalance, User holder) {
         setBalance(startBalance);
-        setBlocked(false);
-        setIban(this.iban);
+        setIban();
         setHolder(holder);
     }
 
     public Account() {
     }
 
-    public void setIban(String iban) {
+    public void setIban() {
         this.iban = "BG" + UUID.randomUUID().toString().toUpperCase();
     }
 
     public void setBalance(BigDecimal balance) {
-        if (balance.doubleValue() < 0) {
-            //TODO: error display
-        } else {
             this.balance = balance;
-        }
     }
 
     public boolean withdraw(BigDecimal amount){
-        if(this.balance.subtract(amount).compareTo(BigDecimal.ZERO) > 0 && !isBlocked){
+        if(this.balance.subtract(amount).compareTo(BigDecimal.ZERO) >= 0){
             this.balance = balance.subtract(amount);
             return true;
-        } else {
-            System.out.println("not enough finds");
-            return false;
-            //TODO: Display that there is not enough funds for this withdraw;
         }
+
+        // Returns false if the funds are less than the amount.
+        return false;
     }
 
     public boolean deposit(BigDecimal amount){
-        if(!isBlocked){
             this.balance = balance.add(amount);
             return true;
-        } else {
-            return false;
-            //TODO: Display that the account is blocked.
-        }
+
     }
 
     public void setHolder(User holder) {
         this.holder = holder;
-    }
-
-    public void setBlocked(boolean blocked) {
-        this.isBlocked = blocked;
-    }
-
-
-    public boolean isBlocked() {
-        return isBlocked;
     }
 
     public BigDecimal getBalance() {

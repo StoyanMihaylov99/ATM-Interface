@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="accountContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.AccountController">
+<AnchorPane fx:id="accountContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.AccountController">
    <children>
       <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="61.0" layoutY="113.0" prefHeight="31.0" prefWidth="67.0" text="IBAN:" AnchorPane.leftAnchor="61.0" AnchorPane.topAnchor="113.0">
          <font>

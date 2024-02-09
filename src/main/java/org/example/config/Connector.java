@@ -1,11 +1,9 @@
 package org.example.config;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
-import org.example.User;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+    // This is custom class for making an EntityManager and make transaction with it.
 public class Connector {
 
     private static final String NAME = "ATM";
@@ -13,8 +11,8 @@ public class Connector {
     private static EntityManager entityManager;
 
     public static void creating(){
-       factory =
-                Persistence.createEntityManagerFactory(NAME);
+
+       factory = Persistence.createEntityManagerFactory(NAME);
 
         entityManager = factory.createEntityManager();
     }
@@ -34,7 +32,4 @@ public class Connector {
         return entityManager;
     }
 
-    public static EntityManagerFactory getFactory() {
-        return factory;
-    }
 }

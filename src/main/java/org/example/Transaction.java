@@ -1,14 +1,8 @@
 package org.example;
-import jdk.jfr.ContentType;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 @Entity
 @Table(name = "transactions")
 public class Transaction {
