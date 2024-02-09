@@ -48,4 +48,13 @@ Also you can make deposits,withdraws and make transaction to other users.
   - Account;
   - Transaction;
 
+# How to test it
+
+  - first you will need installed java on your machine, it's recommended to be java version 17+.
+  - And just click on the ATM.jar file.
+  - https://www.dropbox.com/scl/fi/oxza9ii6lcm2pqxwsvji3/ATM.jar?rlkey=96fy6nuzmjmhum8ept96qbbbc&dl=0
+  - If there is no responce, you will need to downloald jarfix, and run it once, the program just config your machine.
+  - if there is issue please contact me: stoqn.business@gmail.com.
+    
+
 
