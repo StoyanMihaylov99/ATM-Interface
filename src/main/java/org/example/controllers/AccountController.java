@@ -45,17 +45,6 @@ public class AccountController implements Initializable {
         setIbanInfo();
     }
 
-    public void deleteAccount(ActionEvent actionEvent) throws IOException {
-        if(SelectedAccount.getBalance().compareTo(BigDecimal.ZERO) == 0){
-            if(AccountService.deleteAccountById(SelectedAccount.getId(),SelectedAccount.getIban())){
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/fxml/deleted-account.fxml"));
-                Parent root = loader.load();
-                this.accountContainer.getScene().setRoot(root);
-            }
-        }
-    }
-
     public void openTransferView(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/transaction-view.fxml"));
